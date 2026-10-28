@@ -1,0 +1,29 @@
+{
+  "name": "lcc-family100-spagalas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "validate": "tsx scripts/validate-questions.ts"
+  },
+  "dependencies": {
+    "@fontsource/oswald": "^5.2.5",
+    "@fontsource/poppins": "^5.2.6",
+    "canvas-confetti": "^1.9.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "tsx": "^4.19.2",
+    "typescript": "~5.6.3",
+    "vite": "^8.3.5"
+  }
+}
