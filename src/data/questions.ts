@@ -1,6 +1,7 @@
 import type { GradeCategory, SessionName } from '../config';
 import type { Question } from '../game/types';
 import { class8Questions } from './questions-class8';
+import { class9Questions } from './questions-class9';
 
 interface SourceQuestion {
   session: SessionName;
@@ -202,4 +203,4 @@ const class7Questions: Question[] = sourceQuestions.map((item) => ({
   answers: [{ text: item.answer, points: 100 }],
 }));
 
-export const questions: Question[] = [...class7Questions, ...class8Questions];
+export const questions: Question[] = [...class7Questions, ...class8Questions, ...class9Questions];

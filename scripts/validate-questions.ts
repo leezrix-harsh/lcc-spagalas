@@ -3,7 +3,7 @@ import { SESSIONS, type GradeCategory } from '../src/config';
 
 let errors = 0;
 const ids = new Set<string>();
-const categories: GradeCategory[] = ['Kelas 7', 'Kelas 8'];
+const categories: GradeCategory[] = ['Kelas 7', 'Kelas 8', 'Kelas 9'];
 for (const category of categories) {
   for (const session of SESSIONS) {
     const rows = questions.filter((question) => question.category === category && question.session === session);
@@ -21,9 +21,13 @@ for (const category of categories) {
         console.error(`${question.id}: soal harus memiliki satu kunci jawaban.`);
         errors++;
       }
-      const expectedPoints = category === 'Kelas 7' ? 100 : 10;
+      const expectedPoints = category === 'Kelas 7' ? 100 : category === 'Kelas 8' ? 10 : session === 'Penyisihan' ? 10 : session === 'Semi-Final' ? 20 : 30;
       if (question.answers.reduce((sum, answer) => sum + answer.points, 0) !== expectedPoints) {
         console.error(`${question.id}: poin jawaban harus ${expectedPoints}.`);
+        errors++;
+      }
+      if (category === 'Kelas 9' && question.options?.length !== 4) {
+        console.error(`${question.id}: soal Kelas 9 harus memiliki empat pilihan jawaban.`);
         errors++;
       }
     }

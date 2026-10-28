@@ -11,6 +11,7 @@ export interface Question {
   session: SessionName;
   number: number;
   question: string;
+  options?: string[];
   answers: Answer[];
 }
 

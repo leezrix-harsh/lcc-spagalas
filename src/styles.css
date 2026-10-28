@@ -83,6 +83,12 @@ h1, h2, .team-label, .team-score, .pot strong { font-family: 'Oswald', sans-seri
 .question-text { min-height: 1.7em; margin: 0 0 14px; color: var(--putih); font-size: clamp(1rem, 2.1vw, 1.75rem); line-height: 1.3; text-align: center; }
 .answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
 .answer-grid:has(.answer-slot:only-child) { grid-template-columns: minmax(0, 1fr); }
+.choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.choice-option { min-height: 48px; display: flex; align-items: center; padding: 10px 14px; border: 1px solid #ffd970b3; border-radius: 7px; color: var(--putih); background: linear-gradient(100deg, #8f0d1f, #611023); font-size: clamp(.78rem, 1.15vw, 1rem); }
+.choice-correct { color: #102719; border-color: #75dfa0; background: var(--hijau-benar); }
+.answer-key { grid-column: 1 / -1; margin: 4px 0 0; color: var(--emas-muda); font-weight: 600; text-align: center; }
+.choice-actions { grid-column: 1 / -1; display: flex; justify-content: center; margin-top: 5px; }
+.display-page .choice-option { min-height: clamp(48px, 8vh, 86px); padding: 1vh 1vw; font-size: clamp(.9rem, 1.7vw, 1.8rem); }
 .answer-slot { position: relative; display: grid; grid-template-columns: 37px minmax(0, 1fr) 48px; min-height: 53px; align-items: stretch; padding: 0; overflow: hidden; border: 1px solid #ffd970b3; border-radius: 7px; color: white; background: linear-gradient(100deg, #b3142c, #761023); cursor: pointer; text-align: left; transform-style: preserve-3d; transition: transform .45s, background .3s; }
 .answer-slot:not(:disabled):hover { filter: brightness(1.18); }
 .answer-slot.is-open { color: #17120a; background: var(--krem); transform: rotateX(0); }
@@ -161,6 +167,7 @@ h1, h2, .team-label, .team-score, .pot strong { font-family: 'Oswald', sans-seri
   .display-header { gap: 8px; }
   .display-score-row { gap: 6px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .display-page .answer-grid { gap: 7px; }
+  .choice-grid { grid-template-columns: 1fr; gap: 7px; }
   .display-page .answer-slot { min-height: 44px; }
   .display-toolbar { top: 5px; right: 12px; }
   .display-footer .small-button { display: none; }
