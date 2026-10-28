@@ -26,8 +26,12 @@ for (const category of categories) {
         console.error(`${question.id}: poin jawaban harus ${expectedPoints}.`);
         errors++;
       }
-      if (category === 'Kelas 9' && question.options?.length !== 4) {
-        console.error(`${question.id}: soal Kelas 9 harus memiliki empat pilihan jawaban.`);
+      if (category === 'Kelas 9' && question.options !== undefined) {
+        console.error(`${question.id}: soal Kelas 9 harus berbentuk essay tanpa pilihan jawaban.`);
+        errors++;
+      }
+      if (category === 'Kelas 9' && /^[A-D]\.\s/.test(question.answers[0]?.text ?? '')) {
+        console.error(`${question.id}: kunci jawaban Kelas 9 tidak boleh menyertakan label pilihan.`);
         errors++;
       }
     }
