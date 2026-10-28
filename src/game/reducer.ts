@@ -81,7 +81,15 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         : { ...next, control: action.team, firstControl: next.firstControl ?? action.team, stealing: false };
     case 'answer': {
       const question = next.selectedQuestion;
-      if (!question || !isTeamIndex(next, next.control) || next.roundDone || next.opened[action.index]) return state;
+      if (
+        !question
+        || !isTeamIndex(next, next.control)
+        || next.roundDone
+        || !Number.isInteger(action.index)
+        || action.index < 0
+        || action.index >= question.answers.length
+        || next.opened[action.index]
+      ) return state;
       const opened = [...next.opened];
       opened[action.index] = true;
       const points = question.answers[action.index].points * next.multipliers[next.session];

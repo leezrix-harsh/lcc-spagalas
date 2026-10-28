@@ -93,6 +93,8 @@ h1, h2, .team-label, .team-score, .pot strong { font-family: 'Oswald', sans-seri
 .answer-slot:not(.is-open) .answer-points { color: var(--emas-muda); background: #621025; }
 .action-row { margin-top: 14px; }
 .action-row .button { min-height: 39px; padding: 9px 12px; font-size: .76rem; }
+.action-row .button:disabled { cursor: not-allowed; opacity: .5; transform: none; filter: none; }
+.sound-hint { margin: 10px 0 0; color: #b7c5da; font-size: .72rem; line-height: 1.6; }
 .secondary-actions { padding-top: 12px; border-top: 1px solid #ffffff1b; }
 .host-pot { justify-self: center; }
 .host-pot strong { font-size: 2.5rem; }

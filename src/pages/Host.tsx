@@ -32,7 +32,14 @@ export default function Host({ state, dispatch, questions, connected, emitSound 
   const selectQuestion = (question: Question) => { dispatch({ type: 'selectQuestion', question }); sound('pilihSoal'); };
   const openAnswer = (index: number) => {
     const alreadyOpen = state.opened[index];
-    if (alreadyOpen || !state.selectedQuestion || state.control === null || state.roundDone) return;
+    if (
+      alreadyOpen
+      || !state.selectedQuestion
+      || index < 0
+      || index >= state.selectedQuestion.answers.length
+      || state.control === null
+      || state.roundDone
+    ) return;
     dispatch({ type: 'answer', index });
     sound('benar');
   };
@@ -125,9 +132,18 @@ export default function Host({ state, dispatch, questions, connected, emitSound 
             <Board question={state.selectedQuestion} opened={state.opened} onAnswer={openAnswer} locked={state.control === null || state.roundDone} revealOnHost />
             <div className="action-row">
               {teamNames.map((name, team) => <button className={`button ${team % 2 ? 'button-team-b' : 'button-team-a'}`} onClick={() => dispatch({ type: 'control', team })} key={team}>{name} kontrol ({team + 1})</button>)}
-              <button className="button button-red" onClick={strike}>Jawaban salah (X)</button>
+              <button
+                className="button button-red"
+                onClick={strike}
+                disabled={!state.selectedQuestion || state.control === null || state.roundDone}
+              >
+                Jawaban salah — {state.control === null ? 'pilih tim kontrol dulu' : teamNames[state.control]} (X)
+              </button>
               {state.timerDuration > 0 && <button className="button button-dark" onClick={() => dispatch({ type: 'timerToggle' })}>{state.timerRunning ? 'Hentikan timer' : 'Mulai timer'} (T)</button>}
             </div>
+            <p className="sound-hint">
+              Bunyi benar/salah diputar di layar penonton. Klik aktivasi suara pada layar itu; untuk bunyi juga di operator, aktifkan “Suara panel”.
+            </p>
             <div className="action-row secondary-actions">
               <button className="small-button" onClick={() => { dispatch({ type: 'revealAll' }); sound('flip'); }}>Buka semua sisa jawaban</button>
               <button className="small-button" onClick={() => dispatch({ type: 'resetStrikes' })}>Reset strike</button>

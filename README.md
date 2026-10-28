@@ -29,8 +29,11 @@ Hasil build berada di folder `dist/`.
 2. Tekan **Buka Layar Penonton** atau buka `#/display` pada jendela baru; seret jendela itu ke proyektor.
 3. Klik **Klik untuk mengaktifkan suara** di layar penonton. Gunakan F11 atau tombol **Layar Penuh**.
 4. Pilih kategori kelas (Kelas 7, 8, atau 9). Daftar tim otomatis: 7A–7D, 8A–8C, atau 9A–9D. Skor tiap kategori tetap tersimpan terpisah saat berpindah kategori.
-5. Pilih sesi dan soal. Operator menilai rebutan melalui tombol tim kontrol, lalu membuka nomor jawaban atau menekan X untuk jawaban salah.
-6. Setelah tiga strike, kontrol berpindah ke tim berikutnya untuk kesempatan mencuri. Selesaikan ronde, lalu pilih soal berikutnya.
+5. Pilih sesi dan soal. Tekan tombol **[nama tim] kontrol** untuk memilih tim yang sedang menjawab.
+6. Untuk jawaban benar, buka nomor jawaban yang sesuai. Untuk jawaban salah/tidak terjawab, tekan **Jawaban salah — [nama tim] (X)** atau tombol `X`. Tombol salah aktif setelah tim kontrol dipilih.
+7. Setelah tiga strike, kontrol berpindah ke tim berikutnya untuk kesempatan mencuri. Jawaban salah saat steal mengakhiri ronde dan bank kembali ke tim awal.
+
+Efek suara benar dan salah diputar pada layar penonton setelah tombol aktivasi suara diklik. Jika ingin bunyi juga di laptop operator, aktifkan **Suara panel** di pengaturan.
 
 Pintasan di panel operator: `1–7` buka jawaban, `X` salah, `A`/`B` tim kontrol, `N` soal berikutnya, `T` timer, `Z` undo, `M` mute.
 Skor manual dapat ditambah atau dikurangi dengan memilih nominal cepat 10, 25, 50, atau 100 poin, atau memasukkan nominal sendiri.
