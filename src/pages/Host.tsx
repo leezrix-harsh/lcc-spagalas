@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Dispatch } from 'react';
-import { CATEGORY_NAMES, DEFAULT_MULTIPLIERS, SESSIONS, TIMER_OPTIONS, type GradeCategory } from '../config';
+import { CATEGORY_NAMES, ROUND_CORRECT_POINTS, ROUND_TIMERS, ROUND_WRONG_ANSWER_PENALTIES, SESSIONS, TIMER_OPTIONS, type GradeCategory } from '../config';
 import { getMuted, getVolume, playSound, setMuted, setVolume } from '../audio/sfx';
 import type { GameAction, GameState, Question, TeamIndex } from '../game/types';
 import Board from '../components/Board';
@@ -107,8 +107,7 @@ export default function Host({ state, dispatch, questions, connected, emitSound 
             <h2>Pengaturan permainan</h2>
             <label>Kategori kelas<select className="field" value={state.category} onChange={(event) => dispatch({ type: 'category', category: event.target.value as GradeCategory })}>{CATEGORY_NAMES.map((category) => <option key={category}>{category}</option>)}</select></label>
             <label>Sesi<select className="field" value={state.session} onChange={(event) => dispatch({ type: 'session', session: event.target.value as typeof SESSIONS[number] })}>{SESSIONS.map((session) => <option key={session}>{session}</option>)}</select></label>
-            {state.category !== 'Kelas 9' && <label>Pengali poin ×{state.multipliers[state.session]}<input className="field" type="number" min="1" value={state.multipliers[state.session]} onChange={(event) => dispatch({ type: 'multiplier', session: state.session, value: Number(event.target.value) || DEFAULT_MULTIPLIERS[state.session] })} /></label>}
-            {state.category === 'Kelas 9' && <p className="muted">Skor babak: {state.session === 'Penyisihan' ? '+10 / salah 0' : state.session === 'Semi-Final' ? '+20 / salah −10' : '+30 / salah −15'}</p>}
+            <p className="muted">Skor babak: benar +{ROUND_CORRECT_POINTS[state.session]} / salah {ROUND_WRONG_ANSWER_PENALTIES[state.session] ? `−${ROUND_WRONG_ANSWER_PENALTIES[state.session]}` : '0'}{state.category === 'Kelas 9' ? ` · ${ROUND_TIMERS[state.session]} detik` : ''}</p>
             {teamNames.map((name, team) => <label key={team}>Nama tim {team + 1}<input className="field" value={name} onChange={(event) => dispatch({ type: 'teamName', team, value: event.target.value })} /></label>)}
             <label>Timer<select className="field" value={state.timerDuration} onChange={(event) => dispatch({ type: 'timerDuration', value: Number(event.target.value) })}>{TIMER_OPTIONS.map((time) => <option key={time} value={time}>{time ? `${time} detik` : 'Mati'}</option>)}</select></label>
             <label>Volume utama {Math.round(volume * 100)}%<input className="field" type="range" min="0" max="1" step="0.05" value={volume} onChange={(event) => { const next = Number(event.target.value); setVolumeState(next); setVolume(next); }} /></label>

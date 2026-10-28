@@ -1,4 +1,4 @@
-import type { GradeCategory, SessionName } from '../config';
+import { ROUND_CORRECT_POINTS, type GradeCategory, type SessionName } from '../config';
 import type { Question } from '../game/types';
 import { class8Questions } from './questions-class8';
 import { class9Questions } from './questions-class9';
@@ -200,7 +200,7 @@ const class7Questions: Question[] = sourceQuestions.map((item) => ({
   session: item.session,
   number: item.number,
   question: item.question,
-  answers: [{ text: item.answer, points: 100 }],
+  answers: [{ text: item.answer, points: ROUND_CORRECT_POINTS[item.session] }],
 }));
 
 export const questions: Question[] = [...class7Questions, ...class8Questions, ...class9Questions];

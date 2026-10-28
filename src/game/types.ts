@@ -24,7 +24,6 @@ export interface GameState {
   session: SessionName;
   category: GradeCategory;
   categoryStandings: Record<GradeCategory, CategoryStanding>;
-  multipliers: Record<SessionName, number>;
   selectedQuestion: Question | null;
   played: string[];
   opened: boolean[];
@@ -45,7 +44,6 @@ export type GameSnapshot = Omit<GameState, 'history'>;
 export type GameAction =
   | { type: 'session'; session: SessionName }
   | { type: 'category'; category: GradeCategory }
-  | { type: 'multiplier'; session: SessionName; value: number }
   | { type: 'teamName'; team: TeamIndex; value: string }
   | { type: 'selectQuestion'; question: Question }
   | { type: 'control'; team: TeamIndex }

@@ -2,7 +2,7 @@
 
 Website permainan untuk Lomba Cerdas Cermat Sumpah Pemuda x Bulan Bahasa, SMP Negeri 13 Jember.
 
-> Bank soal Kelas 7, 8, dan 9 dari dokumen panitia sudah dimasukkan untuk Penyisihan, Semi-Final, dan Final. Skor Kelas 8: benar +10, salah −5. Kelas 9 mengikuti dokumen: Penyisihan benar +10/salah 0 (30 detik), Semi-Final +20/−10 (25 detik), Final +30/−15 (20 detik).
+> Bank soal Kelas 7, 8, dan 9 dari dokumen panitia sudah dimasukkan untuk Penyisihan, Semi-Final, dan Final. Semua jenjang menggunakan skor yang sama: Penyisihan benar +2/salah 0, Semi-Final benar +3/salah 0, dan Final benar +5/salah −2. Timer Kelas 9 mengikuti dokumen: Penyisihan 30 detik, Semi-Final 25 detik, Final 20 detik.
 
 ## Menjalankan
 
@@ -43,7 +43,7 @@ Skor manual dapat ditambah atau dikurangi dengan memilih nominal cepat 10, 25, 5
 - **Soal:** edit `src/data/questions.ts` (Kelas 7), `src/data/questions-class8.ts` (Kelas 8), dan `src/data/questions-class9.ts` (Kelas 9). Tiap sesi berisi 60 soal dengan ID unik dan kunci jawaban. Jalankan `npm run validate` setelah perubahan.
 - **Suara MP3:** taruh berkas di `public/sounds/`, lalu isi map `customSounds` pada `src/config.ts`. Suara sintesis Web Audio tersedia secara default.
 - **Logo:** tambahkan `public/logo-spagalas.png` dan gunakan slot logo di header Display.
-- **Pengali:** ubah `DEFAULT_MULTIPLIERS` pada `src/config.ts`; pengali aktif juga dapat diedit dari panel operator.
+- **Skor babak:** aturan poin benar dan penalti jawaban salah untuk semua jenjang ditetapkan pada `src/config.ts`.
 
 ## Deploy statis
 

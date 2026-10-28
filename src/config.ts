@@ -9,20 +9,20 @@ export const CATEGORIES = {
 } as const;
 export type GradeCategory = keyof typeof CATEGORIES;
 export const CATEGORY_NAMES = Object.keys(CATEGORIES) as GradeCategory[];
-export const DEFAULT_MULTIPLIERS: Record<SessionName, number> = {
-  Penyisihan: 1,
-  'Semi-Final': 2,
-  Final: 3,
+export const ROUND_CORRECT_POINTS: Record<SessionName, number> = {
+  Penyisihan: 2,
+  'Semi-Final': 3,
+  Final: 5,
+};
+export const ROUND_WRONG_ANSWER_PENALTIES: Record<SessionName, number> = {
+  Penyisihan: 0,
+  'Semi-Final': 0,
+  Final: 2,
 };
 export const ROUND_TIMERS: Record<SessionName, number> = {
   Penyisihan: 30,
   'Semi-Final': 25,
   Final: 20,
-};
-export const WRONG_ANSWER_PENALTIES: Record<GradeCategory, number> = {
-  'Kelas 7': 0,
-  'Kelas 8': 5,
-  'Kelas 9': 0,
 };
 export const TIMER_OPTIONS = [0, 10, 15, 20, 25, 30] as const;
 export const STORAGE_KEY = 'lcc-spagalas-state-v1';

@@ -1,4 +1,4 @@
-import { CATEGORIES, DEFAULT_MULTIPLIERS, ROUND_TIMERS, SESSIONS, WRONG_ANSWER_PENALTIES, type GradeCategory } from '../config';
+import { CATEGORIES, ROUND_TIMERS, ROUND_WRONG_ANSWER_PENALTIES, SESSIONS, type GradeCategory } from '../config';
 import type { GameAction, GameSnapshot, GameState } from './types';
 
 const initialSnapshot: GameSnapshot = {
@@ -9,7 +9,6 @@ const initialSnapshot: GameSnapshot = {
     'Kelas 8': { teamNames: [...CATEGORIES['Kelas 8']], scores: [0, 0, 0] },
     'Kelas 9': { teamNames: [...CATEGORIES['Kelas 9']], scores: [0, 0, 0, 0] },
   },
-  multipliers: { ...DEFAULT_MULTIPLIERS },
   selectedQuestion: null,
   played: [],
   opened: [],
@@ -64,8 +63,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         bank: 0, strikes: 0, roundDone: false, stealing: false, winnerShown: false,
         ...(action.category === 'Kelas 9' ? { timerDuration: ROUND_TIMERS[next.session], seconds: ROUND_TIMERS[next.session] } : {}),
       };
-    case 'multiplier':
-      return { ...next, multipliers: { ...next.multipliers, [action.session]: Math.max(1, action.value) } };
     case 'teamName': {
       const current = next.categoryStandings[next.category];
       if (!Number.isInteger(action.team) || action.team < 0 || action.team >= current.teamNames.length) return state;
@@ -97,8 +94,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       ) return state;
       const opened = [...next.opened];
       opened[action.index] = true;
-      const points = question.answers[action.index].points
-        * (next.category === 'Kelas 9' ? 1 : next.multipliers[next.session]);
+      const points = question.answers[action.index].points;
       const allOpen = opened.every(Boolean);
       const current = next.categoryStandings[next.category];
       if (next.stealing) {
@@ -118,9 +114,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const strikes = next.strikes + 1;
       const current = next.categoryStandings[next.category];
       const scores = [...current.scores];
-      const wrongPenalty = next.category === 'Kelas 9'
-        ? next.session === 'Semi-Final' ? 10 : next.session === 'Final' ? 15 : 0
-        : WRONG_ANSWER_PENALTIES[next.category];
+      const wrongPenalty = ROUND_WRONG_ANSWER_PENALTIES[next.session];
       scores[next.control] -= wrongPenalty;
       const categoryStandings = updateStanding(next, { ...current, scores });
       if (strikes >= 3 && !next.stealing) {
@@ -158,7 +152,6 @@ function resetCurrentMatch(state: GameState): GameState {
     session: state.session,
     category: state.category,
     categoryStandings,
-    multipliers: state.multipliers,
     played: state.played,
     timerDuration: state.timerDuration,
     seconds: state.timerDuration,

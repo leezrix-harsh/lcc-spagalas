@@ -26,7 +26,6 @@ export function loadState(): GameState | null {
       return {
         ...initialState,
         session: saved.session ?? initialState.session,
-        multipliers: saved.multipliers ?? initialState.multipliers,
         played: saved.played ?? [],
         timerDuration: saved.timerDuration ?? 0,
         seconds: saved.timerDuration ?? 0,

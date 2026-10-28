@@ -1,3 +1,4 @@
+import { ROUND_CORRECT_POINTS } from '../config';
 import type { Question } from '../game/types';
 
 interface SourceQuestion {
@@ -197,5 +198,5 @@ export const class8Questions: Question[] = sourceQuestions.map((item) => ({
   session: item.session,
   number: item.number,
   question: item.question,
-  answers: [{ text: item.answer, points: 10 }],
+  answers: [{ text: item.answer, points: ROUND_CORRECT_POINTS[item.session] }],
 }));

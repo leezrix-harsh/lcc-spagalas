@@ -1,5 +1,5 @@
 import { questions } from '../src/data/questions';
-import { SESSIONS, type GradeCategory } from '../src/config';
+import { ROUND_CORRECT_POINTS, SESSIONS, type GradeCategory } from '../src/config';
 
 let errors = 0;
 const ids = new Set<string>();
@@ -21,7 +21,7 @@ for (const category of categories) {
         console.error(`${question.id}: soal harus memiliki satu kunci jawaban.`);
         errors++;
       }
-      const expectedPoints = category === 'Kelas 7' ? 100 : category === 'Kelas 8' ? 10 : session === 'Penyisihan' ? 10 : session === 'Semi-Final' ? 20 : 30;
+      const expectedPoints = ROUND_CORRECT_POINTS[session];
       if (question.answers.reduce((sum, answer) => sum + answer.points, 0) !== expectedPoints) {
         console.error(`${question.id}: poin jawaban harus ${expectedPoints}.`);
         errors++;
