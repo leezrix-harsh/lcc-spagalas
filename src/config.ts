@@ -24,7 +24,7 @@ export const ROUND_TIMERS: Record<SessionName, number> = {
   'Semi-Final': 25,
   Final: 20,
 };
-export const TIMER_OPTIONS = [0, 10, 15, 20, 25, 30] as const;
+export const TIMER_OPTIONS = [0, 10, 15, 20, 25, 30, 60] as const;
 export const STORAGE_KEY = 'lcc-spagalas-state-v1';
 export const CHANNEL_NAME = 'lcc-spagalas';
 export const customSounds: Partial<Record<string, string>> = {};
